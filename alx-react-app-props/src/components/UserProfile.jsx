@@ -1,11 +1,10 @@
-const UserProfile = (props) => {
-  return (
-    <div>
-      <h2>{props.name}</h2>
-      <p>Age: {props.age}</p>
-      <p>Bio: {props.bio}</p>
-    </div>
-  );
-};
+import React, { createContext, useContext } from "react";
 
-export default UserProfile;
+export const UserContext = createContext(null);
+export const useUserContext = () => {
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error("useUserContext must be used within a UserContextProvider");
+  }
+  return context;
+};

@@ -1,11 +1,21 @@
-const EditRecipeForm = () => {
+// src/components/EditRecipeForm.jsx
+import { useState } from "react";
+import { useRecipeStore } from "../recipeStore";
+
+const EditRecipeForm = ({ recipe }) => {
   const { updateRecipe } = useRecipeStore();
   const [updatedTitle, setUpdatedTitle] = useState(recipe.title);
-  const [updatedDescription, setUpdatedDescription] = useState(recipe.description);
+  const [updatedDescription, setUpdatedDescription] = useState(
+    recipe.description
+  );
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedRecipe = { ...recipe, title: updatedTitle, description: updatedDescription };
+    e.preventDefault(); // Prevent the default form submission
+    const updatedRecipe = {
+      ...recipe,
+      title: updatedTitle,
+      description: updatedDescription,
+    };
     updateRecipe(updatedRecipe);
   };
 
@@ -24,6 +34,7 @@ const EditRecipeForm = () => {
       />
       <button type="submit">Update Recipe</button>
     </form>
+  );
 };
 
 export default EditRecipeForm;

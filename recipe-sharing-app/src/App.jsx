@@ -6,6 +6,7 @@ import {
   useParams,
 } from "react-router-dom";
 import RecipeDetails from "./RecipeDetails";
+import AddRecipeForm from "./components/AddRecipeForm";
 import { useRecipeStore } from "./recipeStore";
 
 const App = () => {
@@ -13,7 +14,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/recipe/:recipeId" element={<RecipeDetailsWrapper />} />
-        {/* Other Routes */}
+        <Route path="" element={<AddRecipeForm />} />
       </Routes>
     </Router>
   );

@@ -8,13 +8,17 @@ import {
 import RecipeDetails from "./RecipeDetails";
 import AddRecipeForm from "./components/AddRecipeForm";
 import { useRecipeStore } from "./recipeStore";
+import RecommendationsList from "./components/RecommendationList";
+import FavoritesList from "./components/FavoritesList";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/recipe/:recipeId" element={<RecipeDetailsWrapper />} />
-        <Route path="" element={<AddRecipeForm />} />
+        <Route path="add-recipe" element={<AddRecipeForm />} />
+        <Route path="favorites-list" element={<FavoritesList />} />
+        <Route path="recommedations-list" element={<RecommendationsList />} />
       </Routes>
     </Router>
   );

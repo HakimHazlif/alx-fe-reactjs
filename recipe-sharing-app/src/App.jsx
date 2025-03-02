@@ -8,7 +8,7 @@ import {
 import RecipeDetails from "./RecipeDetails";
 import AddRecipeForm from "./components/AddRecipeForm";
 import { useRecipeStore } from "./recipeStore";
-import RecommendationsList from "./components/RecommendationList";
+import RecommendationsList from "./components/RecommendationsList";
 import FavoritesList from "./components/FavoritesList";
 
 const App = () => {

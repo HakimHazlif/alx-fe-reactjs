@@ -28,12 +28,21 @@ function RegistrationForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!username || !email || !password)
-      setFormDataErrors({
-        username: !!username,
-        email: !!email,
-        password: !!password,
-      });
+    if (!username)
+      setFormDataErrors((prevErrors) => ({
+        ...prevErrors,
+        username: "This field is requered",
+      }));
+    if (!email)
+      setFormDataErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "This field is requered",
+      }));
+    if (!password)
+      setFormDataErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "This field is requered",
+      }));
 
     console.log(formData);
     setFormData(initialFormData);

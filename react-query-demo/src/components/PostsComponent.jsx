@@ -1,26 +1,27 @@
 import { useQuery } from "react-query";
 
+const fetchPosts = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  return res.json();
+};
+
 function PostsComponent() {
   const {
     data: posts,
     isLoading,
     error,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["posts"],
-    queryFn: async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-
-      if (!res.ok) throw new Error("Failed to fetch posts");
-
-      return res.json();
-    },
+    queryFn: fetchPosts,
     staleTime: 5000,
   });
 
   if (isLoading) return <p>Loading posts...</p>;
 
-  if (error) return <p>{error.message}</p>;
+  if (isError) return <p>{error.message}</p>;
 
   return (
     <div>

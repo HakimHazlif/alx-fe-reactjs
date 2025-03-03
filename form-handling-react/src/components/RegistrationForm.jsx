@@ -14,6 +14,8 @@ function RegistrationForm() {
     password: false,
   });
 
+  const { username, email, password } = formData;
+
   function handleChange(e, label) {
     const { value } = e.target;
 
@@ -25,8 +27,6 @@ function RegistrationForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    const { username, email, password } = formData;
 
     if (!username || !email || !password)
       setFormDataErrors({
@@ -44,7 +44,7 @@ function RegistrationForm() {
       <div>
         <label htmlFor="username">Username</label>
         <input
-          value={formData.username}
+          value={username}
           id="username"
           name="username"
           type="text"
@@ -57,7 +57,7 @@ function RegistrationForm() {
       <div>
         <label htmlFor="email">Email</label>
         <input
-          value={formData.email}
+          value={email}
           id="email"
           name="email"
           type="text"
@@ -70,7 +70,7 @@ function RegistrationForm() {
       <div>
         <label htmlFor="password">Password</label>
         <input
-          value={formData.password}
+          value={password}
           id="password"
           name="password"
           type="password"

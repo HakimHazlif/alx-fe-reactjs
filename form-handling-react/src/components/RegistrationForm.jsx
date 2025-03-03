@@ -8,7 +8,7 @@ const initialFormData = {
 
 function RegistrationForm() {
   const [formData, setFormData] = useState(initialFormData);
-  const [formDataErrors, setFormDataErrors] = useState({
+  const [errors, setErrors] = useState({
     username: false,
     email: false,
     password: false,
@@ -29,19 +29,19 @@ function RegistrationForm() {
     e.preventDefault();
 
     if (!username)
-      setFormDataErrors((prevErrors) => ({
+      setErrors((prevErrors) => ({
         ...prevErrors,
-        username: "This field is requered",
+        username: true,
       }));
     if (!email)
-      setFormDataErrors((prevErrors) => ({
+      setErrors((prevErrors) => ({
         ...prevErrors,
-        email: "This field is requered",
+        email: true,
       }));
     if (!password)
-      setFormDataErrors((prevErrors) => ({
+      setErrors((prevErrors) => ({
         ...prevErrors,
-        password: "This field is requered",
+        password: true,
       }));
 
     console.log(formData);
@@ -61,7 +61,7 @@ function RegistrationForm() {
           onChange={(e) => handleChange(e, "username")}
           // required
         />
-        {formDataErrors.username && <p>This field is requered</p>}
+        {errors.username && <p>This field is requered</p>}
       </div>
       <div>
         <label htmlFor="email">Email</label>
@@ -74,7 +74,7 @@ function RegistrationForm() {
           onChange={(e) => handleChange(e, "email")}
           // required
         />
-        {formDataErrors.email && <p>This field is requered</p>}
+        {errors.email && <p>This field is requered</p>}
       </div>
       <div>
         <label htmlFor="password">Password</label>
@@ -87,7 +87,7 @@ function RegistrationForm() {
           onChange={(e) => handleChange(e, "password")}
           // required
         />
-        {formDataErrors.password && <p>This field is requered</p>}
+        {errors.password && <p>This field is requered</p>}
       </div>
       <button type="submit">Submit</button>
     </form>

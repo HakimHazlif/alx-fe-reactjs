@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, Route, Routes } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
@@ -23,7 +23,10 @@ const Profile = () => {
           Profile Settings
         </Link>
       </nav>
-      <Outlet />
+      <Routes>
+        <Route path="details" element={<ProfileDetails />} />
+        <Route path="settings" element={<ProfileSettings />} />
+      </Routes>
     </div>
   );
 };

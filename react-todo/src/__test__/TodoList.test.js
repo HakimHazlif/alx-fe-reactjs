@@ -1,83 +1,73 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import TodoList from "../components/TodoList";
+import TodoList from "../TodoList";
 
 describe("TodoList Component", () => {
-  test("renders TodoList component correctly", () => {
+  test("renders initial todos", () => {
     render(<TodoList />);
 
-    const heading = screen.getByRole("heading", { name: /todo list/i });
-    expect(heading).toBeInTheDocument();
+    expect(screen.getByText("Todo List")).toBeInTheDocument();
 
     expect(screen.getByText("Learn React")).toBeInTheDocument();
     expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
-    expect(screen.getByText("Write tests")).toBeInTheDocument();
-
-    expect(screen.getByText("2 items left")).toBeInTheDocument();
-
-    expect(screen.getByPlaceholderText("Enter a new todo")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /add todo/i })
-    ).toBeInTheDocument();
+    expect(screen.getByText("Write tests for the app")).toBeInTheDocument();
   });
 
-  test("allows adding a new todo", () => {
+  test("adds a new todo", () => {
     render(<TodoList />);
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(3);
+    const input = screen.getByTestId("todo-input");
+    const addButton = screen.getByTestId("add-button");
 
-    const input = screen.getByPlaceholderText("Enter a new todo");
-    const addButton = screen.getByRole("button", { name: /add todo/i });
-
-    fireEvent.change(input, { target: { value: "Go shopping" } });
+    fireEvent.change(input, { target: { value: "New test todo" } });
     fireEvent.click(addButton);
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(4);
-    expect(screen.getByText("Go shopping")).toBeInTheDocument();
-    expect(screen.getByText("3 items left")).toBeInTheDocument();
+    expect(screen.getByText("New test todo")).toBeInTheDocument();
 
-    expect(input).toHaveValue("");
+    expect(input.value).toBe("");
   });
 
-  test("allows toggling todo completion status", () => {
+  test("toggles todo completion status", () => {
     render(<TodoList />);
 
-    const todo = screen.getByText("Learn React");
-    const todoItem = todo.closest("li");
+    const todoText = screen.getAllByTestId("todo-text")[0];
+    const todoItem = screen.getAllByTestId("todo-item")[0];
 
-    expect(todoItem).not.toHaveClass("line-through");
-    expect(screen.getByText("2 items left")).toBeInTheDocument();
+    expect(todoItem).not.toHaveClass("completed");
 
-    fireEvent.click(todo);
+    fireEvent.click(todoText);
 
-    expect(todoItem).toHaveClass("line-through");
-    expect(todoItem).toHaveClass("bg-green-50");
-    expect(screen.getByText("1 items left")).toBeInTheDocument();
+    expect(todoItem).toHaveClass("completed");
 
-    fireEvent.click(todo);
+    fireEvent.click(todoText);
 
-    expect(todoItem).not.toHaveClass("line-through");
-    expect(screen.getByText("2 items left")).toBeInTheDocument();
+    expect(todoItem).not.toHaveClass("completed");
   });
 
-  test("allows deleting todos", async () => {
+  test("deletes a todo", () => {
     render(<TodoList />);
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(3);
+    const deleteButtons = screen.getAllByTestId("delete-button");
 
-    const deleteButtons = screen.getAllByRole("button", { name: "" });
+    const firstTodoText = screen.getAllByTestId("todo-text")[0].textContent;
 
     fireEvent.click(deleteButtons[0]);
 
-    await waitFor(() => {
-      expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    expect(screen.queryByText(firstTodoText)).not.toBeInTheDocument();
+  });
+
+  test("shows empty list message when all todos are deleted", () => {
+    render(<TodoList />);
+
+    const deleteButtons = screen.getAllByTestId("delete-button");
+
+    deleteButtons.forEach((button) => {
+      fireEvent.click(button);
     });
 
-    const remainingDeleteButtons = screen.getAllByRole("button", { name: "" });
-    fireEvent.click(remainingDeleteButtons[0]);
-
-    await waitFor(() => {
-      expect(screen.getAllByRole("listitem")).toHaveLength(1);
-    });
+    expect(
+      screen.getByText("No todos yet! Add one above.")
+    ).toBeInTheDocument();
   });
 });

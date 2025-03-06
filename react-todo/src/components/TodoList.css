@@ -1,0 +1,21 @@
+.todo-list-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.empty-list {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

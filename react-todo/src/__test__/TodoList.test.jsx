@@ -64,14 +64,18 @@ test("verify that a todo item can be deleted", async () => {
 
   expect(screen.getAllByRole("listitem")).toHaveLength(3);
 
-  let deleteButtons = screen.getAllByRole("button", { name: "" });
+  let deleteButtons = screen.getAllByRole("button", {
+    name: /Delete Todo/i,
+  });
 
   expect(deleteButtons).toHaveLength(3);
 
   fireEvent.click(deleteButtons[2]);
 
   await waitFor(() => {
-    deleteButtons = screen.getAllByRole("button", { name: "" });
+    deleteButtons = screen.getAllByRole("button", {
+      name: /Delete Todo/i,
+    });
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
     expect(deleteButtons).toHaveLength(2);
   });
@@ -79,7 +83,9 @@ test("verify that a todo item can be deleted", async () => {
   fireEvent.click(deleteButtons[1]);
 
   await waitFor(() => {
-    deleteButtons = screen.getAllByRole("button", { name: "" });
+    deleteButtons = screen.getAllByRole("button", {
+      name: /Delete Todo/i,
+    });
     expect(screen.getAllByRole("listitem")).toHaveLength(1);
     expect(deleteButtons).toHaveLength(1);
   });

@@ -50,6 +50,7 @@ function TodoList() {
             <button
               onClick={() => deleteTodo(todo.id)}
               className="text-red-500 hover:text-red-700 cursor-pointer"
+              aria-label="Delete Todo"
             >
               <FaTrash />
             </button>

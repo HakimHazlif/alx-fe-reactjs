@@ -14,6 +14,9 @@ describe("TodoList Component", () => {
     expect(screen.getByText("Write tests")).toBeInTheDocument();
 
     expect(screen.getByText("2 items left")).toBeInTheDocument();
+    expect(screen.getAllByRole("listitem", { name: "todo-list" })).toHaveLength(
+      3
+    );
 
     expect(screen.getByPlaceholderText("Enter a new todo")).toBeInTheDocument();
     expect(

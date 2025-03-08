@@ -31,7 +31,7 @@ function TodoList() {
     <div className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold mb-4 text-center">Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
-      <ul>
+      <ul data-testid="todo-list">
         {todos.map((todo) => (
           <li
             key={todo.id}

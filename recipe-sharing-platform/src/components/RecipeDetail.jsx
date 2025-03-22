@@ -39,7 +39,7 @@ function RecipeDetail() {
 
         <div className="p-6">
           <h3 className="text-2xl font-semibold text-green-700 mb-4">
-            Ingredients
+            ingredients
           </h3>
           <ul className="list-disc pl-6 space-y-2">
             <li className="text-lg text-gray-700">200g spaghetti</li>

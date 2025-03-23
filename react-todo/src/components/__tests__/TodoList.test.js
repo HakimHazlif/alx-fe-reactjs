@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TodoList from "../components/TodoList";
 
-describe("TodoList Component", () => {
+describe("TodoList testing component", () => {
   // Test 1: Initial Render
   test("renders TodoList component correctly", () => {
     render(<TodoList />);

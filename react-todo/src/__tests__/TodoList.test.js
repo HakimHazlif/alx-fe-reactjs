@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import TodoList from "../components/TodoList";
 
 // Test 1: Initial Render
-test("renders TodoList component correctly", () => {
+test("renders TodoList component", () => {
   render(<TodoList />);
 
   // Check for heading

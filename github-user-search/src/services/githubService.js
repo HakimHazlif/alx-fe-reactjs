@@ -16,7 +16,7 @@ export async function fetchUserData(query) {
     const userData = await axios.get(url, options);
 
     return userData.data;
-  } catch {
-    return "Looks like we can't find the user";
+  } catch (err) {
+    throw new Error(err.message);
   }
 }

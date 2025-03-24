@@ -19,8 +19,8 @@ const Search = () => {
 
       setUserData(data);
       setLoading(false);
-    } catch (error) {
-      setError(error);
+    } catch {
+      setError("Looks like we can't find the user");
     }
   }
 

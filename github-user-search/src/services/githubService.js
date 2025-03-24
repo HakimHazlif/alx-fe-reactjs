@@ -10,9 +10,13 @@ const options = {
   },
 };
 
-export async function fetchUserData(query) {
+export async function fetchUserData({ username, location, minRepos }) {
   try {
-    const url = `${BASE_URL}/users/${query}`;
+    let query = `q=${username}`;
+    if (location) query += `+location:${location}`;
+    if (minRepos) query += `+repos:${minRepos}`;
+
+    const url = `${BASE_URL}/search/users?${query}`;
     const userData = await axios.get(url, options);
 
     return userData.data;
